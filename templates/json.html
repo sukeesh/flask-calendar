@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Sukeesh</title>
+<meta charset='utf-8' />
+<link href="{{ url_for('static', filename='fullcalendar.min.css') }}" rel='stylesheet' />
+<link href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}" rel='stylesheet' />
+<link href="{{ url_for('static', filename='fullcalendar.print.css') }}" rel='stylesheet' media='print' />
+<script src="{{ url_for('static', filename='lib/moment.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='fullcalendar.min.js') }}"></script>
+<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+
+<script>
+
+	$(document).ready(function() {
+
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month'
+			},
+			defaultDate: '2017-01-12',
+			editable: true,
+			eventLimit: true,
+			events: {
+				url: 'data',
+				error: function() {
+					$('#script-warning').show();
+				}
+			},
+			loading: function(bool) {
+				$('#loading').toggle(bool);
+			}
+		});
+
+	});
+
+</script>
+
+<style>
+
+	body {
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+	}
+
+	#script-warning {
+		display: none;
+		background: #eee;
+		border-bottom: 1px solid #ddd;
+		padding: 0 10px;
+		line-height: 40px;
+		text-align: center;
+		font-weight: bold;
+		font-size: 12px;
+		color: red;
+	}
+
+	#loading {
+		display: none;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+
+	#calendar {
+		max-width: 700px;
+		margin: 10px auto;
+		padding: 0 10px;
+	}
+
+</style>
+
+<link href="{{ url_for('static', filename='sukeesh.css') }}" rel='stylesheet' />
+
+</head>
+<body>
+<div id="Yo">
+	<font color="#2bc493">
+
+	<div style="width: 100%;overflow: hidden; margin-top: 1px; margin-left: 2px;">
+		<font size="20" color="#f8f8f8">
+		<div id="leftPanel" style="width: 200px; height: 660px; float: left; background-color: #2ed39e; position: absolute;">
+			<br><br>
+				<div id="time" align="center" style="background-color: #2bc493;"></div>
+			<br><br>
+			<script type="text/javascript">
+				function checkTime(i) {
+				    if (i < 10) {
+				        i = "0" + i;
+				    }
+				    return i;
+				}
+
+				function startTime() {
+				    var today = new Date();
+				    var h = today.getHours();
+				    var m = today.getMinutes();
+				    var s = today.getSeconds();
+				    m = checkTime(m);
+				    s = checkTime(s);
+				    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+				    t = setTimeout(function () {
+				        startTime()
+				    }, 500);
+				}
+				startTime();
+			</script>
+			</font>
+			<font color="#f8f8f8"> <b> &nbsp; &nbsp; &nbsp; Weather</b> </font>
+			<font size="20" color="#f8f8f8">
+			<div id="WeatherW" style="width: 199px; background-color: #2bc493;" >
+				<div id="theCloud" style="width: 20px; float: left;"><i class="fa fa-cloud" aria-hidden="true"></i></div>
+				<div id="show-weather" style="margin-left: 0px;"></div>
+			</div>
+
+			</font>
+			<br>
+
+			<font color="#f8f8f8">
+				<b><div id="address" align="center" style="background-color: #2bc493;"></div></b>
+
+			<script type="text/javascript">
+				$.get("http://ipinfo.io", function (response) {
+				    $("#address").html(response.city + ", " + response.region);
+				}, "jsonp");
+
+				var callbackFunction = function(data) {
+				    var wind = data.query.results.channel.wind;
+				    document.getElementById("show-weather").innerHTML = Math.round((wind.chill - 32) / (9 / 5)) + "<sup>o</sup>C";
+				};
+			</script>
+			</font>
+			<br><br>
+			<div id='weather'>
+				<script src="https://query.yahooapis.com/v1/public/yql?q=select wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='Bangalore')&format=json&callback=callbackFunction"></script>
+			</div>
+
+			<div id='AddEvent' align="center"> <button type="button" onclick="func()"> Add Event </button> </div>
+			<script type="text/javascript">
+				function func(){
+					var r1 = prompt("Title : ", " Enter Title ");
+					var r2 = prompt("Start Date : ", "yyyy-mm-dd");
+					var r3 = prompt("End Date : ", "yyyy-mm-dd");
+				}
+			</script>
+		</div>
+
+		<div id="rightPanel" style="margin-left: 100px; margin-top: 0px;">
+			<div id='loading'>loading...</div>
+			<div id='calendar'></div>
+		</div>
+
+	</div>
+
+	</font>
+</div>
+</body>
+</html>

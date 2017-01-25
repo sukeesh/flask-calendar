@@ -1,0 +1,55 @@
+[
+  {
+    "title": "New Year Eve",
+    "start": "2017-01-01"
+  },
+  {
+    "title": "Long Challenge",
+    "start": "2017-01-07",
+    "end": "2017-01-10"
+  },
+  {
+    "title": "Repeating Event",
+    "start": "2017-01-09T16:00:00-05:00"
+  },
+  {
+    "id": "999",
+    "title": "Repeating Event",
+    "start": "2017-01-16T16:00:00-05:00"
+  },
+  {
+    "title": "Codeforces",
+    "url": "http://codeforces.com/profile/sukeesh",
+    "start": "2017-01-11"
+  },
+  {
+    "title": "Meeting",
+    "start": "2017-01-12T10:30:00-05:00",
+    "end": "2017-01-12T12:30:00-05:00"
+  },
+  {
+    "title": "Lunch",
+    "start": "2017-01-12T12:00:00-05:00"
+  },
+  {
+    "title": "Meeting",
+    "start": "2017-01-12T14:30:00-05:00"
+  },
+  {
+    "title": "Happy Hour",
+    "start": "2017-01-12T17:30:00-05:00"
+  },
+  {
+    "title": "Dinner",
+    "start": "2017-01-12T20:00:00"
+  },
+  {
+    "title": "Birthday Party",
+    "start": "2017-01-13"
+  },
+  {
+    "title": "Github",
+    "url": "http://github.com/sukeesh",
+    "start": "2017-01-28"
+  }
+]
